@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ca">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joc de Preguntes - Panell SPA</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <nav>
+        <button id="botoModeJoc" class="active" type="button">Joc</button>
+        <button id="botoModeAdmin" type="button">Admin</button>
+    </nav>
+
+    <main id="pantallaJoc">
+        <header class="header-seccio">
+            <h1>Joc de Preguntes</h1>
+        </header>
+
+        <section id="seccioNom">
+            <h2>Introdueix el teu nom per jugar</h2>
+            <form id="formulariNom" class="form-login">
+                <input type="text" id="inputNom" placeholder="El teu nom" required>
+                <button type="submit">Començar Partida</button>
+            </form>
+        </section>
+
+        <section id="seccioBenvinguda" class="hidden panell-usuari">
+            <p>Jugador: <strong id="nomUsuari"></strong></p>
+            <button id="botoEsborrar" type="button">Tancar Sessió</button>
+        </section>
+
+        <section id="zonaJoc" class="hidden">
+            <div class="capcalera-partida">
+                <div id="temporitzador" class="badge">
+                    ⏱️ <span id="temps">0</span>s
+                </div>
+                <div id="marcador" class="badge"></div>
+            </div>
+
+            <div id="partida"></div>
+            <button id="botoEnviar" class="hidden btn-destacat" type="button">Enviar Resultats</button>
+        </section>
+    </main>
+
+    <!-- admin -->
+    <main id="pantallaAdmin" class="hidden">
+        <header class="header-seccio">
+            <h1>Panell d'Administració</h1>
+        </header>
+
+        <fieldset class="panell-formulari">
+            <legend id="titolFormAdmin">Afegir pregunta a la BBDD</legend>
+            <form id="formulariAdmin">
+                <input type="hidden" id="adminPreguntaId" value="">
+
+                <div class="camp-complet">
+                    <label for="adminTextPregunta"><strong>Enunciat de la pregunta:</strong></label>
+                    <input type="text" id="adminTextPregunta" value="De quin pais es aquesta bandera?" required>
+                </div>
+
+                <div class="camp-complet">
+                    <label for="adminFitxerImatge"><strong>Imatge:</strong></label>
+                    <input type="file" id="adminFitxerImatge" accept="image/*">
+                </div>
+
+                <div class="fila-respostes">
+                    <div>
+                        <label for="adminResp0">Opció 0:</label>
+                        <input type="text" id="adminResp0" required>
+                    </div>
+                    <div>
+                        <label for="adminResp1">Opció 1:</label>
+                        <input type="text" id="adminResp1" required>
+                    </div>
+                    <div>
+                        <label for="adminResp2">Opció 2:</label>
+                        <input type="text" id="adminResp2" required>
+                    </div>
+                    <div>
+                        <label for="adminResp3">Opció 3:</label>
+                        <input type="text" id="adminResp3" required>
+                    </div>
+                </div>
+
+                <div class="camp-select">
+                    <label for="adminCorrectIndex"><strong>Quina és la resposta correcta?</strong></label>
+                    <select id="adminCorrectIndex">
+                        <option value="0">Opció 0</option>
+                        <option value="1">Opció 1</option>
+                        <option value="2">Opció 2</option>
+                        <option value="3">Opció 3</option>
+                    </select>
+                </div>
+
+                <div class="botons-formulari">
+                    <button type="submit" id="botoDesarPregunta">Guardar Pregunta</button>
+                    <button type="button" id="botoCancelEditar" class="hidden btn-secundari">Cancel·lar Edició</button>
+                </div>
+            </form>
+        </fieldset>
+
+        <section class="seccio-taula">
+            <h2>Preguntes Existents</h2>
+            <div class="taula-contenidor">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Imatge</th>
+                            <th>Pregunta</th>
+                            <th>Respostes</th>
+                            <th>Correcta</th>
+                            <th>Accions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="taulaPreguntesCos"></tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

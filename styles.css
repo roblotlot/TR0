@@ -1,0 +1,376 @@
+:root {
+    --primary: #2563eb;
+    --primary-hover: #1d4ed8;
+    --primary-light: #eff6ff;
+    --bg: #f8fafc;
+    --card-bg: #ffffff;
+    --text: #0f172a;
+    --text-muted: #64748b;
+    --border: #e2e8f0;
+    --border-hover: #cbd5e1;
+    --danger: #ef4444;
+    --danger-hover: #dc2626;
+    --danger-light: #fef2f2;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: var(--bg);
+    color: var(--text);
+    line-height: 1.5;
+    min-height: 100vh;
+    padding: 96px 20px 48px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Barra de navegació flotant */
+nav {
+    position: fixed;
+    top: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 6px;
+    border-radius: 9999px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+    z-index: 100;
+}
+
+nav button {
+    background-color: transparent;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 20px;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+nav button:hover {
+    color: var(--text);
+    background-color: #f1f5f9;
+}
+
+nav button.active {
+    background-color: var(--primary);
+    color: #ffffff;
+    box-shadow: 0 2px 8px rgba(37, 99, 235, 0.25);
+}
+
+/* Targetes de contingut */
+#pantallaJoc,
+#pantallaAdmin {
+    width: 100%;
+    background: var(--card-bg);
+    padding: 36px 32px;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-card);
+}
+
+#pantallaJoc {
+    max-width: 680px;
+}
+
+#pantallaAdmin {
+    max-width: 1050px;
+}
+
+.header-seccio {
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 16px;
+    margin-bottom: 24px;
+}
+
+h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+}
+
+h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+/* Botons generals */
+button {
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 10px 18px;
+    border-radius: var(--radius-sm);
+    border: 1px solid transparent;
+    background-color: var(--primary);
+    color: #ffffff;
+    transition: all 0.15s ease;
+}
+
+button:hover {
+    background-color: var(--primary-hover);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+.btn-secundari {
+    background-color: #f1f5f9;
+    color: var(--text);
+    border-color: var(--border);
+}
+
+.btn-secundari:hover {
+    background-color: #e2e8f0;
+}
+
+.btn-destacat {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-top: 24px;
+}
+
+#botoEsborrar,
+button[onclick*="eliminarPregunta"] {
+    background-color: var(--danger-light);
+    color: var(--danger);
+    border-color: #fee2e2;
+}
+
+#botoEsborrar:hover,
+button[onclick*="eliminarPregunta"]:hover {
+    background-color: var(--danger);
+    color: #ffffff;
+}
+
+/* Panell Usuari */
+.panell-usuari {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc;
+    border: 1px solid var(--border);
+    padding: 12px 18px;
+    border-radius: var(--radius-sm);
+    margin-bottom: 20px;
+}
+
+.form-login {
+    display: flex;
+    gap: 10px;
+}
+
+.form-login input {
+    margin-top: 0;
+}
+
+/* Capçalera partida i insígnies */
+.capcalera-partida {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.badge {
+    display: inline-flex;
+    align-items: center;
+    font-size: 0.85rem;
+    color: var(--primary);
+    background-color: var(--primary-light);
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 9999px;
+    border: 1px solid #dbeafe;
+}
+
+/* Zona de Pregunta i Opcions */
+.pregunta {
+    text-align: center;
+}
+
+.pregunta h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.pregunta img {
+    display: block;
+    margin: 0 auto 20px;
+    max-width: 100%;
+    max-height: 260px;
+    object-fit: cover;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-subtle);
+    border: 1px solid var(--border);
+}
+
+.opcions {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.opcions button {
+    background-color: #ffffff;
+    color: var(--text);
+    border: 1.5px solid var(--border);
+    padding: 14px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    border-radius: var(--radius-md);
+    min-height: 52px;
+    box-shadow: var(--shadow-subtle);
+}
+
+.opcions button:hover {
+    background-color: #fafbfc;
+    border-color: var(--primary);
+    color: var(--primary);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(37, 99, 235, 0.08);
+}
+
+/* Formularis i Panell Admin */
+.panell-formulari {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+legend {
+    font-weight: 600;
+    padding: 0 10px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.camp-complet {
+    margin-bottom: 16px;
+}
+
+.fila-respostes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.camp-select {
+    margin-bottom: 20px;
+}
+
+.botons-formulari {
+    display: flex;
+    gap: 10px;
+}
+
+input[type="text"],
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    font-size: 0.95rem;
+    margin-top: 6px;
+    outline: none;
+    transition: all 0.15s ease;
+    background-color: #fff;
+}
+
+input[type="text"]:focus,
+select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.12);
+}
+
+/* Taula de l'Admin */
+.taula-contenidor {
+    width: 100%;
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9rem;
+}
+
+th,
+td {
+    border-bottom: 1px solid var(--border);
+    padding: 12px 14px;
+    text-align: left;
+    vertical-align: middle;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+tr:hover {
+    background-color: #fafbfc;
+}
+
+img.thumb {
+    width: 44px;
+    height: 32px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 640px) {
+
+    .opcions,
+    .fila-respostes,
+    .form-login {
+        grid-template-columns: 1fr;
+        flex-direction: column;
+    }
+
+    #pantallaJoc,
+    #pantallaAdmin {
+        padding: 24px 16px;
+    }
+}

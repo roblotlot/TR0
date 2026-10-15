@@ -1,0 +1,55 @@
+services:
+  # 1. El servidor Node.js
+  app:
+    image: node:20-alpine
+    container_name: joc-preguntes
+    working_dir: /app/server
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - DB_HOST=db
+      - DB_USER=user
+      - DB_PASSWORD=userpassword
+      - DB_NAME=joc_db
+    command: sh -c "npm install && node app.js"
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy # Espera MySQL estigui actiu 
+
+  # 2. Base de dades MySQL
+  db:
+    image: mysql:8.0
+    container_name: mysql-db
+    restart: unless-stopped
+    command: --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: joc_db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "user", "-puserpassword" ]
+      interval: 3s
+      timeout: 3s
+      retries: 10
+
+  # 3. Gestor Adminer
+  adminer:
+    image: adminer:latest
+    container_name: adminer-db
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+
+volumes:
+  mysql_data:
